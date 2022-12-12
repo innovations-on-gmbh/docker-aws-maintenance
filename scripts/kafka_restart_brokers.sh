@@ -11,15 +11,15 @@ function getRebootStatus () {
 }
 
 CLUSTER_ARN=$(aws kafka list-clusters-v2 --output text --query 'ClusterInfoList[*].ClusterArn')
-echo $CLUSTER_ARN
+echo "CLUSTER_ARN $CLUSTER_ARN"
 for BROKER_ID in $(seq 1 3);
 do
-  echo "$BROKER_ID"
+  echo "BROKER $BROKER_ID REBOOT STARTING"
   REBOOT_REQUEST=$(aws kafka reboot-broker --cluster-arn "$CLUSTER_ARN" --broker-ids "$BROKER_ID")
   
   #REBOOT_OPERATION_ARN="arn:aws:kafka:eu-central-1:220965329085:cluster-operation/devlvm-kafka/32d847a1-c28c-47bb-9d02-8dfb99f351b1-6/641c25d0-5076-4630-bb9f-561fa3a65dcc"
   REBOOT_OPERATION_ARN=$(echo "$REBOOT_REQUEST" | jq '.ClusterOperationArn')
-  echo $REBOOT_OPERATION_ARN
+  echo "REBOOT_OPERATION_ARN: $REBOOT_OPERATION_ARN"
   REBOOT_STATUS=$(getRebootStatus "$REBOOT_OPERATION_ARN")
 
   REBOOT_COMPLETE_STRING=$(echo '{"ClusterOperationInfo": {"OperationState": "REBOOT_COMPLETE"}}' | jq '.ClusterOperationInfo.OperationState')
