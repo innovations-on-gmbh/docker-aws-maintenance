@@ -8,7 +8,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /kafka && tar xzvf kafka.tgz -C /kafka --strip-components=1
 
-COPY log4j_debug.properties kafka_debug /
+COPY log4j_debug.properties enable_kafka_debug /
 
 COPY --chown=root:root scripts/render_config.sh scripts/describe_topic.sh scripts/list_topics.sh /
 

@@ -1,3 +1,0 @@
-#source this file to enable debug outputs:
-#`. /kafka_debug`
-export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:/log4j.properties"
