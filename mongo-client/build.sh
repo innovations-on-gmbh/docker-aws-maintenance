@@ -2,6 +2,6 @@
 
 set -exu
 
-TAG=0.1
+TAG=0.2
 
-docker build --tag ghcr.io/innovations-on-gmbh/docker-aws-maintenance/mongo-client:"$TAG" .
+docker build --platform=linux/amd64 --tag ghcr.io/innovations-on-gmbh/docker-aws-maintenance/mongo-client:"$TAG" .
