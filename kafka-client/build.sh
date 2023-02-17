@@ -2,6 +2,7 @@
 
 set -exu
 
-TAG=0.2
+TAG=0.3
+REPO=ghcr.io/innovations-on-gmbh/docker-aws-maintenance/kafka-client
 
-docker build --platform=linux/amd64 --tag ghcr.io/innovations-on-gmbh/docker-aws-maintenance/kafka-client:"$TAG" .
+docker build --platform=linux/amd64 --tag "$REPO":"$TAG" --tag "$REPO":latest .
