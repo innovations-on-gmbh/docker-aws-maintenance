@@ -3,11 +3,10 @@ set -eu
 
 #TODO check for credentials.yaml, have to be in tf-software-ic repo
 
-kubectl run --rm -ti -n default mongo-client \
---image=ghcr.io/innovations-on-gmbh/docker-aws-maintenance/mongo-client:latest \
---env="PASSWORD=$(sops -d --extract '["documentdb"]["root_user"]["password"]["value"]' credentials.yaml)" \
---env="ENDPOINT=$(aws docdb describe-db-clusters --output text --query 'DBClusters[0].Endpoint')" \
---env="MASTER_USERNAME=$(aws docdb describe-db-clusters --output text --query 'DBClusters[0].MasterUsername')" \
---image-pull-policy=Always \
---overrides='{"metadata": {"annotations": { "linkerd.io/inject":"disabled" } } }' \
--- /bin/bash
+kubectl run --rm -ti -n default kafka-client \
+  --image=ghcr.io/innovations-on-gmbh/docker-aws-maintenance/kafka-client:latest \
+  --env="CONFIG_USER=$(sops -d --extract '["kafka"]["config_user"]["password"]' credentials.yaml)" \
+  --env="BOOTSTRAP=$(aws kafka list-clusters-v2 --output text --query 'ClusterInfoList[*].ClusterArn' | xargs -I {} aws kafka get-bootstrap-brokers --cluster-arn {} --output text)" \
+  --env="CLUSTER_ARN=$(aws kafka list-clusters-v2 --output text --query 'ClusterInfoList[*].ClusterArn')" \
+  --image-pull-policy=Always --overrides='{"metadata": {"annotations": { "linkerd.io/inject":"disabled" } } }' \
+  -- /bin/bash
