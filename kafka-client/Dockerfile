@@ -11,7 +11,7 @@ RUN apt-get update \
 
 COPY log4j_debug.properties enable_kafka_debug /
 
-COPY --chown=root:root scripts/render_config.sh scripts/describe_topic.sh scripts/list_topics.sh scripts/list_groups.sh /
+COPY --chown=root:root scripts/render_config.sh scripts/delete_topic.sh scripts/describe_topic.sh scripts/list_topics.sh scripts/list_groups.sh /
 
 ENV PATH="${PATH}:/kafka/bin:/"
 
