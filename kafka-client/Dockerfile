@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
-ADD https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz /kafka.tgz
+#TODO make configurable
+ADD https://downloads.apache.org/kafka/3.3.2/kafka_2.13-3.3.2.tgz /kafka.tgz
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends openjdk-11-jre wget dnsutils netcat vim \
