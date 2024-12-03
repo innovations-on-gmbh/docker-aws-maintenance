@@ -3,8 +3,7 @@ set -eu
 
 cat <<EOT> /config.properties
 security.protocol=SASL_SSL
-sasl.mechanism=SCRAM-SHA-512
+sasl.mechanism=OAUTHBEARER
 sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required \
-  username='config-admin' \
-  password='$PASSWORD';
+  username='script-runner@ic-pcg1-d-workload.iam.gserviceaccount.com';
 EOT
