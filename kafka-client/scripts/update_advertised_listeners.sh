@@ -1,6 +1,12 @@
 #!/bin/bash
 set -eu
 
+#NOTE: this is a potentially desctructive script, hence it's not automatically copied to the docker image
+
+#TODOs to run this script
+#update dns zone to current cluster
+#remove CLIENT_SECURE (only needed in clusters with TLS auth enabled, e.g. devonpier)
+
 DNS_ZONE=devonpier-kafka.gereae.c1.kafka.eu-central-1.amazonaws.com
 
 for i in {1..3}; do
