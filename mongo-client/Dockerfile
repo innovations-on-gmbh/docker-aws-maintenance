@@ -1,5 +1,5 @@
-FROM mongo:6
+FROM mongo:8
 
-ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem /rds-combined-ca-bundle.pem
+ADD https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem /global-bundle.pem
 
 COPY --chown=root:root scripts/connect.sh /
