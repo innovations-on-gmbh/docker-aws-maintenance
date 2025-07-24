@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-#NOTE: this is a potentially desctructive script, hence it's not automatically copied to the docker image
+#NOTE: this is a potentially destructive script, hence it's not automatically copied to the docker image
 
 #TODOs to run this script
 #update dns zone to current cluster
